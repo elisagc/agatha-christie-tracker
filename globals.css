@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #292626;
+  --primary: #f9a826;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #292626;
+    --foreground: #ededed;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+body {
+  font-family: var(--font-inter);
+  background-image: url('/bg7.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
