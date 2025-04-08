@@ -30,9 +30,9 @@ export function BookCard({ book }: BookCardProps) {
     <Link
       href={`/book/${book.id}`}
       scroll={false}
-      className="group bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+      className="group rounded-lg shadow-md overflow-hidden cursor-pointer"
     >
-      <div className="flex">
+      <div className="flex bg-white ">
         <CardImage book={book} />
         <div className="flex-1 p-3 flex flex-col justify-between">
           <div className="flex gap-1 items-baseline justify-between w-full">

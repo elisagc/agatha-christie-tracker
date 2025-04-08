@@ -19,7 +19,7 @@ export function BookList({}) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(min(300px,100%),1fr))] gap-5">
       {filteredBooks?.map((book) => (
         <BookCard key={book.id} book={book} />
       ))}
