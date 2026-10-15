@@ -2,7 +2,7 @@ import { optionColors } from '@/helpers/constants';
 import { useUpdateUserBook } from '@/services/userBooks/mutations';
 import { UserBook } from '@/interfaces';
 import { BookOpenCheck as Check, BookOpen as Uncheck } from 'lucide-react';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, SubmitEvent, useState } from 'react';
 import CardButton from '../card/CardButton';
 import Rating from '../ui/Rating';
 
@@ -26,7 +26,7 @@ const BookForm = ({ book }: BookFormProps) => {
 
   const { isPending } = toggleUserBookMutation;
 
-  const handleOnSubmit = async (e: MouseEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     await toggleUserBookMutation.mutateAsync({
       id: book.id,
@@ -40,7 +40,7 @@ const BookForm = ({ book }: BookFormProps) => {
           <textarea
             value={values.comment ?? ''}
             onChange={(e) => {
-              setValues({ ...values, comment: e.target.value });
+              setValues((prev) => ({ ...prev, comment: e.target.value }));
             }}
             placeholder="Write your notes about the book here..."
             className="w-full p-3 border rounded-lg h-32 focus:border-blue-500 text-sm no-scrollbar resize-none"
@@ -51,7 +51,7 @@ const BookForm = ({ book }: BookFormProps) => {
             <Rating
               rating={values.rating}
               onClick={(rating) => {
-                setValues({ ...values, rating });
+                setValues((prev) => ({ ...prev, rating }));
               }}
             />
 
@@ -62,7 +62,7 @@ const BookForm = ({ book }: BookFormProps) => {
               } disabled:opacity-50`}
               onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
-                setValues((prev) => ({ ...values, read: !prev.read }));
+                setValues((prev) => ({ ...prev, read: !prev.read }));
               }}
               icon={values.read ? <Check size={14} /> : <Uncheck size={14} />}
             />

@@ -8,6 +8,16 @@ export const getUserBooks = async (): Promise<UserBook[]> => {
   return response.json();
 };
 
+const putUserBook = async (bookId: number, body: Partial<UserBook>) => {
+  const response = await fetch(`${URL}/${bookId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error('Error updating book');
+  return response.json();
+};
+
 const updateBookField = async ({
   bookId,
   field,
@@ -17,39 +27,16 @@ const updateBookField = async ({
   field: string;
   value: string | number | boolean;
 }) => {
-  try {
-    const response = await fetch(`${URL}/${bookId}`, {
-      method: 'PUT',
-      body: JSON.stringify({ [field]: value }),
-    });
-
-    return response.json();
-  } catch (error) {
-    throw error;
-  }
+  return putUserBook(bookId, { [field]: value });
 };
 
 export const updateReadStatus = async (bookId: number, status: boolean) => {
-  try {
-    return updateBookField({ bookId, field: 'read', value: status });
-  } catch (error) {
-    throw error;
-  }
+  return updateBookField({ bookId, field: 'read', value: status });
 };
 
 export const updateUserBook = async (
   bookId: number,
   updates: Partial<UserBook>
 ) => {
-  console.log('ebntras en update', updates);
-
-  try {
-    const response = await fetch(`${URL}/${bookId}`, {
-      method: 'PUT',
-      body: JSON.stringify(updates),
-    });
-    return response.json();
-  } catch (error) {
-    throw error;
-  }
+  return putUserBook(bookId, updates);
 };

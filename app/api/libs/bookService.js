@@ -1,20 +1,22 @@
 import { connection } from '@/app/api/libs/db';
 
+export class ValidationError extends Error {}
+
 export async function validateRequestBody(request) {
   const body = await request.json();
   const { read, comment, rating } = body;
 
   if (read !== undefined && typeof read !== 'boolean') {
-    throw new Error('El campo "read" debe ser un booleano');
+    throw new ValidationError('El campo "read" debe ser un booleano');
   }
   if (comment !== undefined && typeof comment !== 'string') {
-    throw new Error('El campo "comment" debe ser un string');
+    throw new ValidationError('El campo "comment" debe ser un string');
   }
   if (
     rating !== undefined &&
     (typeof rating !== 'number' || rating < 0 || rating > 5)
   ) {
-    throw new Error('El campo "rating" debe ser un número entre 0 y 5');
+    throw new ValidationError('El campo "rating" debe ser un número entre 0 y 5');
   }
 
   return { read, comment, rating };
@@ -45,7 +47,7 @@ export async function createBook(bookId, updates) {
   }
 
   if (!fields.length) {
-    throw new Error('No se proporcionó ningún campo para actualizar');
+    throw new ValidationError('No se proporcionó ningún campo para actualizar');
   }
 
   const placeholders = new Array(fields.length).fill('?').join(', ');
@@ -68,7 +70,7 @@ export async function updateBook(bookId, updates) {
   }
 
   if (!fields.length) {
-    throw new Error('No se proporcionó ningún campo para actualizar');
+    throw new ValidationError('No se proporcionó ningún campo para actualizar');
   }
 
   values.push(1, bookId); // user_id fijo en 1 y el bookId
