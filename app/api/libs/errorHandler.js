@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
+import { ValidationError } from '@/app/api/libs/bookService';
 
 export function handleErrors(error) {
-  if (error.message === 'El campo "read" debe ser un booleano') {
+  if (error instanceof ValidationError) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   } else if (error.message === 'Libro no encontrado') {
     return NextResponse.json({ error: error.message }, { status: 404 });

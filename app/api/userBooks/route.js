@@ -9,17 +9,19 @@ export async function GET() {
       [1]
     );
 
+    const userBooksById = new Map(
+      userBooks.map((userBook) => [userBook.book_id, userBook])
+    );
+
     const allBooks = books.map((book) => {
-      const userBook = userBooks.find(
-        (userBook) => userBook.book_id === book.id
-      );
+      const userBook = userBooksById.get(book.id);
 
       return {
         ...book,
         coverUrl: book.cover_url,
         read: userBook ? Boolean(userBook.is_read) : false,
-        rating: userBook ? userBook.rating : 0,
-        comment: userBook ? userBook.comment : '',
+        rating: userBook?.rating ?? 0,
+        comment: userBook?.comment ?? '',
       };
     });
 

@@ -3,7 +3,7 @@
 import BookDetail from '@/components/book/BookDetail';
 import { Modal } from '@/components/ui/Modal';
 import { UserBook } from '@/interfaces';
-import { useQuery } from '@tanstack/react-query';
+import { useUserBooks } from '@/services/userBooks/queries';
 import { useParams } from 'next/navigation';
 
 type Params = {
@@ -13,9 +13,7 @@ type Params = {
 const Book = () => {
   const { id } = useParams<Params>();
 
-  const { data: books = [] } = useQuery<UserBook[]>({
-    queryKey: ['userBooks'],
-  });
+  const { data: books = [] } = useUserBooks();
   const book =
     books.find((book) => book.id === +id) ??
     ({
@@ -25,7 +23,6 @@ const Book = () => {
       comment: '',
     } as UserBook);
 
-  console.log('update books query');
   return (
     <Modal title={`#${book.id} - ${book.title}`}>
       <BookDetail book={book} />

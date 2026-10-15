@@ -15,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -36,7 +36,8 @@
     "app/libs/mysql.js",
     "app/api/books/route.js",
     "app/api/userBooks/[userId]/route.js",
-    "app/api/libs/db.js"
+    "app/api/libs/db.js",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

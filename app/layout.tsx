@@ -3,7 +3,6 @@ import { Quicksand } from 'next/font/google';
 import '../globals.css';
 import ReactQueryProvider from '@/helpers/providers';
 import { Toaster } from 'react-hot-toast';
-<Toaster position="bottom-center" />;
 const inter = Quicksand({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

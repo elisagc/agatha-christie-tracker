@@ -1,5 +1,6 @@
 import { optionColors } from '@/helpers/constants';
 import { UserBook } from '@/interfaces';
+import Image from 'next/image';
 import Badge from '../ui/Badge';
 import BookForm from './BookForm';
 interface BookDetailProps {
@@ -20,10 +21,12 @@ const BookDetail = ({ book }: BookDetailProps) => {
       </div>
       <div className="flex gap-4">
         <div className="relative overflow-hidden h-48">
-          <img
+          <Image
             src={book.coverUrl}
             alt={book.title}
-            className="w-full h-full object-cover"
+            width={512}
+            height={800}
+            className="w-auto h-full object-cover"
           />
         </div>
         <div className="flex-1">

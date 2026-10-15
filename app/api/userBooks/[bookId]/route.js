@@ -12,7 +12,6 @@ export async function PUT(request, { params }) {
   try {
     const updates = await validateRequestBody(request);
     const existUserBook = await checkIfBookExists(bookId);
-    console.log(updates, existUserBook);
     if (existUserBook) {
       await updateBook(bookId, updates);
     } else {
