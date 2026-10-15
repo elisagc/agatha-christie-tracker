@@ -2,7 +2,7 @@ import { optionColors } from '@/helpers/constants';
 import { useUpdateUserBook } from '@/services/userBooks/mutations';
 import { UserBook } from '@/interfaces';
 import { BookOpenCheck as Check, BookOpen as Uncheck } from 'lucide-react';
-import { FormEvent, MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import CardButton from '../card/CardButton';
 import Rating from '../ui/Rating';
 
@@ -26,7 +26,7 @@ const BookForm = ({ book }: BookFormProps) => {
 
   const { isPending } = toggleUserBookMutation;
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     await toggleUserBookMutation.mutateAsync({
       id: book.id,

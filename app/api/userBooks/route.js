@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connection } from '@/app/api/libs/db';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 export async function GET() {
   try {
     const books = await connection.query('SELECT * FROM book');
